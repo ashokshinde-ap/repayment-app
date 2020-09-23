@@ -25,6 +25,6 @@ export class DispalyAmortizationComponent implements OnInit {
   }
   private saveAsExcelFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
-    FileSaver.saveAs(data, fileName + '_' + formatDate(new Date(), 'dd-MM-yyyy', 'en') + EXCEL_EXTENSION);
+    FileSaver.saveAs(data, fileName + 'Loan_' + formatDate(new Date(), 'dd-MM-yyyy', 'en') + EXCEL_EXTENSION);
   }
 }
