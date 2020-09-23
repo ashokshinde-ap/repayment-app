@@ -1,0 +1,43 @@
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.margin-top {
+  margin-top: 31px;
+}
+
+/* .bgimg {
+  background-color:rgb(79, 80, 80);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  height: 5px;
+} */
+
+.btn-prime:not(:disabled):not(.disabled):active, .btn-prime:not(:disabled):not(.disabled).active, .show > .btn-prime.dropdown-toggle {
+  color:  #fff;
+  background-color: #007bff;
+  border:solid #007bff;
+
+}
+.btn-prime {
+  color: #3e4444;
+  background-color: #eaece5;
+  border: solid #007bff;
+}
+
+.input-icon{
+  position: absolute;
+  left: 3px;
+  top: calc(50% - 0.5em); /* Keep icon in center of input, regardless of the input height */
+}
+.input{
+  padding-left: 17px;
+}
+.input-wrapper{
+  position: relative;
+}

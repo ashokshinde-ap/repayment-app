@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card mb-3">
+      <div class="card-header">
+        Bar Chart
+      </div>
+      <div class="card-body">
+        <canvas [chartType]="barChartType" [datasets]="barChartData" [labels]="barChartLabels" [legend]="barChartLegend"
+          [options]="barChartOptions" [colors]="barChartColors" baseChart>
+        </canvas>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card mb-3">
+      <div class="card-header">
+        Pie Chart
+      </div>
+      <div class="card-body">
+        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+          [options]="pieChartOptions" [colors]="pieChartColors" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card mb-3">
+      <div class="card-header">
+        Line Chart
+      </div>
+      <div class="card-body">
+        <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+          [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>
