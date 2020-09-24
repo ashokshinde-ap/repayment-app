@@ -20,14 +20,14 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .btn-prime:not(:disabled):not(.disabled):active, .btn-prime:not(:disabled):not(.disabled).active, .show > .btn-prime.dropdown-toggle {
   color:  #fff;
-  background-color: #007bff;
-  border:solid #007bff;
+  background-color: #0275d8;
+  /* border:solid black; */
 
 }
 .btn-prime {
   color: #3e4444;
   background-color: #eaece5;
-  border: solid #007bff;
+  /* border: solid black; */
 }
 
 .input-icon{

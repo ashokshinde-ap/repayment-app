@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
 
   LoanCalValue: ILoanCalculatorField; //get form values.
   amortizationValues: IAmortization[] = []; //calculated Amortization table vaules.
+  tabelValues;
   amortization: IAmortization = {
     installment: null,
     principal: null,
@@ -58,7 +59,7 @@ export class AppComponent implements OnInit {
         '5000',
         [Validators.required, NegativeCheckingValidator.isNegative],
       ],
-      loanTerm: ['1', [Validators.required, NegativeCheckingValidator.isNegative]],
+      loanTerm: ['4', [Validators.required, NegativeCheckingValidator.isNegative]],
       interestRate: ['10', [Validators.required, NegativeCheckingValidator.isNegative]],
       loanType: ['', [Validators.required]],
       termType: ['1', [Validators.required]],
@@ -77,6 +78,9 @@ export class AppComponent implements OnInit {
     this.calculateYearWisePrincipal();
     this.calculateYearWiseInterest();
     this.createLineChartDataset();
+    // console.log(this.amortizationValues);
+    this.tabelValues = this.convertTableArray();
+    // console.log(this.getMonthAsString(new Date().getMonth() + 1));
     // console.log(formatDate(new Date(), 'dd-MM-yyyy', 'en'));
   }
 
@@ -100,7 +104,7 @@ export class AppComponent implements OnInit {
     for (let i = 0; i < this.convertYearIntoMonth(); i++) {
       let interest = loanAmount * this.calculateRateOfInterestMonthly();
       let principal = emi - interest;
-      this.amortization.loanPaidTodate = (principal / loanAmount) * 100;
+      // this.amortization.loanPaidTodate = (principal / loanAmount) * 100;
       // console.log(this.amortizationValues[i].installment);
       this.amortization.principal = principal;
       this.amortization.interest = interest;
@@ -214,7 +218,8 @@ export class AppComponent implements OnInit {
           // yearWisePrincipalAmount.push(principalAmount);
           yearCounter++;
           // console.log(monthCount);
-          console.log('z' + monthCount);
+          // console.log('z' + monthCount);
+
           monthCount = 1;
           // console.log('z' + monthCount);
         }
@@ -230,6 +235,8 @@ export class AppComponent implements OnInit {
 
   calculateYearWisePrincipal() {
     this.yearWisePrincipalAmount = [];
+    let loanAmount = this.LoanCalValue.loanAmount;
+    let LoanCompletedValue = 0;
     let principalAmount = 0;
     for (let i = 0; i < this.amortizationValues.length; i++) {
       if ((!(this.amortizationValues[i].installment == null)) && (i != 0)) {
@@ -241,6 +248,8 @@ export class AppComponent implements OnInit {
         this.yearWisePrincipalAmount.push(Math.round(principalAmount));
       }
       principalAmount += this.amortizationValues[i].principal;
+      LoanCompletedValue += this.amortizationValues[i].principal;
+      this.amortizationValues[i].loanPaidTodate = (LoanCompletedValue / loanAmount) * 100;
     }
     // console.log(yearWisePrincipalAmount);
   }
@@ -260,5 +269,76 @@ export class AppComponent implements OnInit {
       interestAmount += this.amortizationValues[i].interest;
     }
     // console.log(this.yearWiseInterestAmount);
+  }
+
+  convertTableArray() {
+    let customTableArray = [];
+    let month = new Date().getMonth() + 1;
+
+    for (let i = 0; i < this.installmentLabel.length; i++) {
+      let tempArray = [];
+      let first = this.amortizationValues.indexOf(this.amortizationValues.find(data => data.installment == i + 1));
+      let second = this.amortizationValues.indexOf(this.amortizationValues.find(data => data.installment == (i + 1) + 1));
+      // console.log(second);
+      if (second == -1) {
+        second = this.amortizationValues.length;
+      }
+      if (!(i == 0)) {
+        month = 1;
+      }
+      for (let j = first; j < second; j++) {
+        let obj = {
+          month: null,
+          principal: null,
+          interest: null,
+          balance: null,
+          totalPayment: null,
+          startingLoanBalance: null,
+          loanPaidTodate: null,
+        }
+        obj.month = this.getMonthAsString(month);
+        obj.principal = this.amortizationValues[j].principal;
+        obj.interest = this.amortizationValues[j].interest;
+        obj.balance = this.amortizationValues[j].balance;
+        obj.totalPayment = this.amortizationValues[j].totalPayment;
+        obj.startingLoanBalance = this.amortizationValues[j].startingLoanBalance;
+        obj.loanPaidTodate = this.amortizationValues[j].loanPaidTodate;
+        tempArray.push(obj);
+        month++;
+      }
+      let obj2 = { year: null, data: [] };
+      // let obj3 = {
+      //   year: null,
+      //   interestAmount: null,
+      //   principalAmount: null,
+      // }
+      obj2.year = i + 1;
+      // obj3.interestAmount = this.yearWiseInterestAmount[i];
+      // obj3.principalAmount = this.yearWisePrincipalAmount[i];
+      // obj2.year.push(obj3);
+      obj2.data = tempArray;
+      customTableArray.push(obj2)
+    }
+    // console.log(customTableArray);
+
+    return customTableArray;
+  }
+  getMonthAsString(month: number) {
+    switch (month) {
+      case 1: return 'Jan';
+      case 2: return 'Feb';
+      case 3: return 'Mar';
+      case 4: return 'Apr';
+      case 5: return 'May';
+      case 6: return 'Jun';
+      case 7: return 'Jul';
+      case 8: return 'Aug';
+      case 9: return 'Sept';
+      case 10: return 'Oct';
+      case 11: return 'Nov';
+      case 12: return 'Dec';
+      default: return 'Invalid';
+    }
+
   }
 }

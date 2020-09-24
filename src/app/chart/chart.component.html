@@ -2,7 +2,7 @@
   <div class="col-sm-12">
     <div class="card mb-3">
       <div class="card-header">
-        Bar Chart
+        <span class="font-weight-bold">Year-Wise Total Payment and Interest</span>
       </div>
       <div class="card-body">
         <canvas [chartType]="barChartType" [datasets]="barChartData" [labels]="barChartLabels" [legend]="barChartLegend"
@@ -15,7 +15,7 @@
   <div class="col-sm-6">
     <div class="card mb-3">
       <div class="card-header">
-        Pie Chart
+        <span class="font-weight-bold">Total Interest and Payment</span>
       </div>
       <div class="card-body">
         <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
@@ -28,7 +28,7 @@
   <div class="col-sm-6">
     <div class="card mb-3">
       <div class="card-header">
-        Line Chart
+        <span class="font-weight-bold">Year-Wise Remaining Balance</span>
       </div>
       <div class="card-body">
         <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"

@@ -47,7 +47,7 @@ import { NgxMaskModule } from 'ngx-mask'
     ToastrModule.forRoot(),
     FontAwesomeModule,
     // NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
   ],
   providers: [],
   exports: [RoundTheNumber],

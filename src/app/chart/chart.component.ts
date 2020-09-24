@@ -33,8 +33,8 @@ export class ChartComponent implements OnInit {
     responsive: true,
   };
   public barChartColors: Color[] = [
-    { backgroundColor: '#28a745' },
-    { backgroundColor: '#c30101' },
+    { backgroundColor: '#2dde98' },
+    { backgroundColor: '#ff4f81' },
   ]
 
   public barChartLabels: Label[];
@@ -51,7 +51,7 @@ export class ChartComponent implements OnInit {
     responsive: true,
   };
   public pieChartColors: Array<any> = [{
-    backgroundColor: ['#28a745', '#c30101'],
+    backgroundColor: ['#2dde98', '#ff4f81'],
   }];
   public pieChartLabels: Label[] = ['Total Amount Paid', 'Total Interest Paid'];
   public pieChartData: SingleDataSet;
@@ -71,7 +71,7 @@ export class ChartComponent implements OnInit {
   public lineChartColors: Color[] = [
     {
       borderColor: 'black',
-      backgroundColor: '#f0a500',
+      backgroundColor: '#f66733',
     },
   ];
   public lineChartLegend = true;

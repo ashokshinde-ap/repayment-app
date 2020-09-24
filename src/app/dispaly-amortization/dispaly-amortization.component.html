@@ -7,39 +7,104 @@
           Report</button>
       </div>
     </div>
+
     <div class="table-responsive">
       <table class="table table-bordered mt-2" #tableData>
         <thead class="thead-light">
           <tr>
-            <th scope="col" class="text-center">Installments</th>
-            <th scope="col" class="text-center">Starting Loan Amount</th>
-            <th scope="col" class="text-center">Principal Amount</th>
-            <th scope="col" class="text-center">Interest Amount</th>
-            <th scope="col" class="text-center">Payments</th>
-            <th scope="col" class="text-center">Balance</th>
-            <th scope="col" class="text-center">Loan Paid To Date</th>
+            <th scope="col" class="text-center font-weight-bold">Installments</th>
+            <th scope="col" class="text-center font-weight-bold">Starting Loan Amount</th>
+            <th scope="col" class="text-center font-weight-bold">Principal Amount</th>
+            <th scope="col" class="text-center font-weight-bold">Interest Amount</th>
+            <th scope="col" class="text-center font-weight-bold">Payments</th>
+            <th scope="col" class="text-center font-weight-bold">Balance</th>
+            <th scope="col" class="text-center font-weight-bold">Loan Paid To Date</th>
           </tr>
         </thead>
         <tbody>
+
+          <ng-container *ngFor="let year of amortizationValues">
+            <tr class="blank_row font-weight-bold">
+              <td bgcolor="#FFFFFF" colspan="7">{{year.year}} Year</td>
+            </tr>
+            <tr *ngFor="let emi of year?.data">
+              <td scope="row" class="text-center font-weight-bold">{{ emi.month}}</td>
+              <td class="text-center font-weight-bold"><i class="fa fa-inr"
+                  aria-hidden="true"></i>{{ emi.startingLoanBalance | roundTheNumber}}</td>
+              <td class="text-center font-weight-bold"><i class="fa fa-inr"
+                  aria-hidden="true"></i>{{ emi.principal | roundTheNumber}}
+              </td>
+              <td class="text-center font-weight-bold"><i class="fa fa-inr"
+                  aria-hidden="true"></i>{{ emi.interest | roundTheNumber}}
+              </td>
+              <td class="text-center font-weight-bold"><i class="fa fa-inr"
+                  aria-hidden="true"></i>{{ emi.totalPayment | roundTheNumber}}
+              </td>
+              <td class="text-center font-weight-bold"><i class="fa fa-inr"
+                  aria-hidden="true"></i>{{ (emi.balance < 0 ? 0 : emi.balance) | roundTheNumber }}
+              </td>
+              <td class="text-center font-weight-bold">{{ emi.loanPaidTodate |  number : '1.2-2'}} <i
+                  class="fa fa-percent" aria-hidden="true"></i>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+
+
+    </div>
+  </ng-container>
+</div>
+
+
+<!-- <div class="row mt-2">
+  <ng-container *ngIf="amortizationValues?.length">
+    <div class="col">
+      <div class="float-right">
+        <button class="btn btn-success text-white" type="button" (click)="exportTableAsExcelFile(tableData)"><i
+            class="fa fa-download" aria-hidden="true"></i> Download
+          Report</button>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered mt-2" #tableData>
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" class="text-center font-weight-bold">Installments</th>
+            <th scope="col" class="text-center font-weight-bold">Starting Loan Amount</th>
+            <th scope="col" class="text-center font-weight-bold">Principal Amount</th>
+            <th scope="col" class="text-center font-weight-bold">Interest Amount</th>
+            <th scope="col" class="text-center font-weight-bold">Payments</th>
+            <th scope="col" class="text-center font-weight-bold">Balance</th>
+            <th scope="col" class="text-center font-weight-bold">Loan Paid To Date</th>
+          </tr>
+        </thead>
+        <tbody>
+
           <tr *ngFor="let emi of amortizationValues">
-            <th scope="row" class="text-center">{{ emi.installment?'Year '+emi.installment:'' }}</th>
-            <td class="text-center"><i class="fa fa-inr"
+            <th scope="row" class="text-center font-weight-bold">{{ emi.installment?'Year '+emi.installment:'' }}</th>
+            <td class="text-center font-weight-bold"><i class="fa fa-inr"
                 aria-hidden="true"></i>{{ emi.startingLoanBalance | roundTheNumber}}</td>
-            <td class="text-center"><i class="fa fa-inr" aria-hidden="true"></i>{{ emi.principal | roundTheNumber}}
+            <td class="text-center font-weight-bold"><i class="fa fa-inr"
+                aria-hidden="true"></i>{{ emi.principal | roundTheNumber}}
             </td>
-            <td class="text-center"><i class="fa fa-inr" aria-hidden="true"></i>{{ emi.interest | roundTheNumber}}
+            <td class="text-center font-weight-bold"><i class="fa fa-inr"
+                aria-hidden="true"></i>{{ emi.interest | roundTheNumber}}
             </td>
-            <td class="text-center"><i class="fa fa-inr" aria-hidden="true"></i>{{ emi.totalPayment | roundTheNumber}}
+            <td class="text-center font-weight-bold"><i class="fa fa-inr"
+                aria-hidden="true"></i>{{ emi.totalPayment | roundTheNumber}}
             </td>
-            <td class="text-center"><i class="fa fa-inr"
+            <td class="text-center font-weight-bold"><i class="fa fa-inr"
                 aria-hidden="true"></i>{{ (emi.balance < 0 ? 0 : emi.balance) | roundTheNumber }}
             </td>
-            <td class="text-center">{{ emi.loanPaidTodate |  number : '1.2-2'}} <i class="fa fa-percent"
-                aria-hidden="true"></i>
+            <td class="text-center font-weight-bold">{{ emi.loanPaidTodate |  number : '1.2-2'}} <i
+                class="fa fa-percent" aria-hidden="true"></i>
             </td>
           </tr>
         </tbody>
       </table>
+
+
     </div>
   </ng-container>
-</div>
+</div> -->

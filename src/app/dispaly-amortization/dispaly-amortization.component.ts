@@ -13,6 +13,8 @@ const EXCEL_EXTENSION = '.xlsx';
 export class DispalyAmortizationComponent implements OnInit {
   @Input() amortizationValues;
   @Input() excelFileName;
+
+  yearValue = 3;
   constructor() { }
 
   ngOnInit(): void { }
